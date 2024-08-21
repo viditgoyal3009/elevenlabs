@@ -101,7 +101,7 @@ class ElevenLabs
 
         }   
 
-        return $output;
+        return json_encode($output);
 
     }
 }

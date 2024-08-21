@@ -40,7 +40,7 @@ $elevenlabs->text = "Hello, world!";
 //Optional
 $elevenlabs->file_prefix = "prefix"; // default is audio
 $elevenlabs->path = "folder-name"; //default folder is audio
-$audioFile = $elevenlabs->generateAudio($text);
+$audioFile = $elevenlabs->generateAudio();
 ```
 
 The `generateAudio` method will return the path to the generated audio file along with `status` as `sucess` or `error`
