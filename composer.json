@@ -1,5 +1,8 @@
 {
     "name": "innovination/elevenlabs",
+    "description": "A simple package to convert text to audio using Elevenlabs API and store it in the storage.",
+    "type": "library",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Innovination\\Elevenlabs\\": "src/"
@@ -11,5 +14,7 @@
             "email": "vidit@innovination.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": ">=7.4"
+    }
 }
