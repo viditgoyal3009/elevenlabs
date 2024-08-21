@@ -5,25 +5,24 @@ use Illuminate\Support\Facades\Storage;
 
 class ElevenLabs
 {
-    protected $api_key, $voice_id, $text, $file_prefix, $path;
+    protected $api_key;
+    
+    public $voice_id, $text, $file_prefix, $path, $folder;
 
     public function __construct()
     {
         $this->api_key = env('XI_API_KEY');
-        $this->voice_id = $voice_id;
-        $this->text = $text;
-        $this->file_prefix = isset($file_prefix) ?? 'audio';
-        $this->path = isset($path) ? $path . '/' .$this->file_prefix.'-'. uniqid() . '.mp3' : 'audio/' .$this->file_prefix.'-'. uniqid() . '.mp3';
+        
     }
 
-    public function generateAudio($obj)
+    public function generateAudio()
     {
         $api_key = $this->api_key;
         $voice_id = $this->voice_id;
         $text = $this->text;
-        $path = $this->path;
-        $file_prefix = $this->file_prefix;
-
+        $file_prefix = isset($this->file_prefix) ? $this->file_prefix : 'audio';
+        $folder = isset($this->path) ? $this->path : 'audio';
+        $path = isset($this->path) ? $this->path . '/' .$file_prefix.'-'. uniqid() . '.mp3' : 'audio/' .$this->file_prefix.'-'. uniqid() . '.mp3';
         
         $ch = curl_init();
 
@@ -54,8 +53,8 @@ class ElevenLabs
         curl_close($ch);
 
         //Check if directory exists, if not create it
-        if (!file_exists(storage_path('app/public/' . $obj->path))) {
-            mkdir(storage_path('app/public/' . $obj->path), 0777, true);
+        if (!file_exists(storage_path('app/public/' . $folder))) {
+            mkdir(storage_path('app/public/' . $folder), 0777, true);
         }
 
         $localFilePath = storage_path('app/public/' . $path);
