@@ -69,24 +69,40 @@ class ElevenLabs
 
         //Then upload to Digital Ocean Spaces
         $fileContents = file_get_contents($localFilePath);
-        $store = Storage::disk('spaces')->put($path, $fileContents, 'public');
+        $store = Storage::put($path, $fileContents, 'public');
 
         //Check if file is uploaded to Digital Ocean Spaces
         if($store){
 
-            $storage_location = env('DO_SPACES_URL')."/".$path;
-            unlink($localFilePath);
+            $disk = config('filesystems.default');
+            if ($disk === 'spaces') {
+                $storage_location = env('DO_SPACES_URL')."/".$path;
+                unlink($localFilePath);
+            }
+            else if ($disk === 's3')
+            {
+                $storage_location = Storage::disk('s3')->url($path);
+                unlink($localFilePath);
+            }
+            else {
+                $storage_location = Storage::url($path);
+            }
 
-            return json_encode([
+            $output = [
                 'status' => 'success',
                 'path' => $storage_location
-            ]);
+            ];
         } 
         else {
-            return json_encode([
-                'status' => 'failed'
-            ]);
+            $output = [
+                'status' => 'error',
+                'message' => 'Failed to upload file'
+            ];
+
         }   
+
+        return $output;
+
     }
 }
 

@@ -23,18 +23,18 @@ use Innovination\Elevenlabs;
 2. Create an instance of the `TextToAudio` class:
 
 ```php
-$textToAudio = new TextToAudio();
+$elevenlabs = new ElevenLabs();
 ```
 
 3. Convert text to audio:
 
 ```php
-$text = "Hello, world!";
-$audioFile = $textToAudio->convert($text);
+$elevenlabs->voice_id = 'voice-id-on-elevenlabs';
+$elevenlabs->text = "Hello, world!";
+//Optional
+$elevenlabs->file_prefix = "prefix"; // default is audio
+$elevenlabs->path = "folder-name"; //default folder is audio
+$audioFile = $elevenlabs->generateAudio($text);
 ```
 
-The `convert` method will return the path to the generated audio file.
-
-4. Play the audio file:
-
-You can use any audio player of your choice to play the generated audio file.
+The `generateAudio` method will return the path to the generated audio file along with `status` as `sucess` or `error`
