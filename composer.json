@@ -1,0 +1,15 @@
+{
+    "name": "innovination/elevenlabs",
+    "autoload": {
+        "psr-4": {
+            "Innovination\\Elevenlabs\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Vidit Goyal",
+            "email": "vidit@innovination.com"
+        }
+    ],
+    "require": {}
+}
