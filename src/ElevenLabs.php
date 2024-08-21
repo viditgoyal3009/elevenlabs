@@ -1,6 +1,7 @@
 <?php
 
 namespace Innovination\ElevenLabs;
+use Illuminate\Support\Facades\Storage;
 
 class ElevenLabs
 {

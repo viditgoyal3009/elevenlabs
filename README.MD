@@ -20,15 +20,21 @@ To use this package, follow these steps:
 use Innovination\Elevenlabs;
 ```
 
-2. Create an instance of the `TextToAudio` class:
+2. Create an instance of the `Elevenlabs` class:
 
 ```php
 $elevenlabs = new ElevenLabs();
 ```
-
-3. Convert text to audio:
+3. Add ElevenLabs API key to your `.env` file
 
 ```php
+XI_API_KEY='your-api-key'
+```
+
+4. Convert text to audio:
+
+```php
+//Required
 $elevenlabs->voice_id = 'voice-id-on-elevenlabs';
 $elevenlabs->text = "Hello, world!";
 //Optional
